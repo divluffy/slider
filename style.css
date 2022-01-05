@@ -1,0 +1,113 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+
+body {
+  height: 100vh;
+  background: linear-gradient(to bottom, #f3f6ff, #d2dfff);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.slider {
+  width: 50%;
+  height: 400px;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
+  position: relative;
+}
+
+.bowl_cards {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.insde_cards {
+  width: 100%;
+  background: chartreuse;
+  height: 100%;
+  transition: all 0.5s ease-in-out;
+  display: flex;
+}
+
+.bowl {
+  min-width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.number_slid {
+  background: chartreuse;
+  position: absolute;
+  top: 15px;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  left: 15px;
+}
+
+.arrow {
+  position: absolute;
+  top: 50%;
+  background: rgb(201, 218, 255);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.arrow:hover {
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
+  background: rgb(185, 207, 255);
+}
+
+.arrow svg {
+  width: 30px;
+  height: 320px;
+  fill: rgb(29, 29, 29);
+}
+
+.left {
+  left: -50px;
+}
+
+.right {
+  right: -50px;
+}
+
+.points {
+  display: flex;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: -30px;
+}
+
+.point {
+  background: rgb(162, 205, 255);
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-left: 5px;
+  cursor: pointer;
+}
+
+.point.active {
+  background: rgb(14, 46, 223);
+}
