@@ -1,60 +1,79 @@
 const left = document.querySelector(".left");
 const right = document.querySelector(".right");
-const insde_cards = document.querySelector(".insde_cards");
-const point = document.querySelectorAll(".point");
+const bowlCards = document.querySelector(".insde_cards");
 const points = document.querySelector(".points");
+const slider = document.querySelector(".slider");
 
-let client = insde_cards.offsetWidth,
+let client = bowlCards.offsetWidth,
   current = 0,
   widthAll = client,
-  end = insde_cards.childElementCount * widthAll;
+  countSLiders = bowlCards.childElementCount,
+  end = countSLiders * widthAll,
+  timer;
+
+for (let i = 0; i < countSLiders; i++) {
+  let div = document.createElement("div");
+  div.classList.add("point");
+  if (i === 0) {
+    div.classList.add("active");
+  }
+  div.setAttribute("data-point", i + 1);
+  points.appendChild(div);
+}
+
+const point = document.querySelectorAll(".point");
 
 window.addEventListener("resize", () => {
-  client = insde_cards.offsetWidth;
+  client = bowlCards.offsetWidth;
   widthAll = client;
   current = -client;
 });
 
-let timer = setInterval(rightFun, 5000);
+const autoMove = () => {
+  timer = setInterval( nextSlide, 3000);
+};
 
-insde_cards.addEventListener("mouseenter", () => {
+autoMove();
+
+slider.addEventListener("mouseleave", autoMove);
+slider.addEventListener("mouseenter", () => {
   clearInterval(timer);
-  timer = false;
 });
 
-insde_cards.addEventListener("mouseout", () => {
-  timer = setInterval(rightFun, 5000);
-});
+right.addEventListener("click", nextSlide);
+left.addEventListener("click", prevSLide);
 
-right.addEventListener("click", rightFun);
-
-function rightFun() {
+function nextSlide() {
   if (current < end - widthAll) {
     current += client;
-    insde_cards.style.transform = `translateX(-${current}px)`;
-    points.querySelector(".active").classList.remove("active");
-    point[current / widthAll].classList.add("active");
+    bowlCards.style.transition = 'transform 0.8s ease-in-out';
+  } else {
+    current = 0;
+    bowlCards.style.transition = 'none';
   }
-  if (current === end - widthAll) {
-    current = -widthAll;
-  }
+
+  bowlCards.style.transform = `translateX(-${current}px)`;
+  points.querySelector(".active").classList.remove("active");
+  point[current / widthAll].classList.add("active");
 }
 
-left.addEventListener("click", leftFun);
-function leftFun() {
+function prevSLide() {
   if (current > 0) {
     current -= client;
-    insde_cards.style.transform = `translateX(-${current}px)`;
-    points.querySelector(".active").classList.remove("active");
-    point[current / widthAll].classList.add("active");
+  } else {
+    current = end - widthAll;
   }
+
+  bowlCards.style.transform = `translateX(-${current}px)`;
+  points.querySelector(".active").classList.remove("active");
+  point[current / widthAll].classList.add("active");
 }
 
 point.forEach((cell) => {
   cell.addEventListener("click", () => {
     let num = cell.getAttribute("data-point");
     current = num * widthAll - widthAll;
-    insde_cards.style.transform = `translateX(-${current}px)`;
+    bowlCards.style.transform = `translateX(-${current}px)`;
     points.querySelector(".active").classList.remove("active");
     cell.classList.add("active");
   });

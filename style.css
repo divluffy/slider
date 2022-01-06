@@ -20,7 +20,7 @@ img {
 }
 
 .slider {
-  width: 50%;
+  width: 66%;
   height: 400px;
   box-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
   position: relative;
@@ -36,7 +36,7 @@ img {
   width: 100%;
   background: chartreuse;
   height: 100%;
-  transition: all 0.5s ease-in-out;
+  transition: transform 0.8s ease-in-out;
   display: flex;
 }
 
